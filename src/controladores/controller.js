@@ -1,4 +1,4 @@
-import modelMaestros from "./modelMaestros.js";
+import modelMaestros from "../models/modelMaestros.js";
 import bcrypt from "bcryptjs";
 
 const controllerMaestros = {
