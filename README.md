@@ -32,3 +32,5 @@ npm i jsonwebtoken
 
 # Instala Dotenv, un módulo que carga variables de entorno desde un archivo .env en process.env
 npm i dotenv
+
+Cada vez que hacemos pull instalamos los modulos de node con "npm i"
