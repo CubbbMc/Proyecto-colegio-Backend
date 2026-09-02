@@ -62,6 +62,23 @@ leerMaestros: async(req, res) => {
             datos: error,
         })
     }
+},
+
+actualizarMaestro: async (req, res) =>{
+    try {
+        const teacherUpdate = await modelMaestros.findByIdAndUpdate(req.params.id, req.body);
+        if(teacherUpdate._id){
+            res.json({
+                mensaje: "Maestro actualizado correctamente",
+                datos:teacherUpdate
+            })
+        }
+    } catch (error) {
+        res.json({
+            mensaje: "Error al actualizar el maestro",
+            datos: error,
+        })
+    }
 }
 
 }

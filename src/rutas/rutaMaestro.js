@@ -5,6 +5,6 @@ const rutaMaestros = Router();
 rutaMaestros.post('/', controllerMaestros.createMaestro);
 rutaMaestros.get('/:id',controllerMaestros.leerMaestrosPorId);
 rutaMaestros.get('/', controllerMaestros.leerMaestros);
-
+rutaMaestros.put('/:id',controllerMaestros.actualizarMaestro);
 
 export default rutaMaestros;
