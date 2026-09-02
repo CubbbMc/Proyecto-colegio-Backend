@@ -47,7 +47,24 @@ leerMaestrosPorId: async(req,res)=>{
     });
         
     }
+},
+
+leerMaestros: async(req, res) => {
+    try {
+        const maestros = await modelMaestros.find();
+        res.json({
+            mensaje: "Lista de maestros encontrados",
+            datos:maestros,
+        })
+    } catch (error) {
+        res.json({
+            mensaje: "Lista de maestros no encontrada",
+            datos: error,
+        })
+    }
 }
 
 }
+
+
 export default controllerMaestros;
