@@ -6,5 +6,6 @@ rutaMaestros.post('/', controllerMaestros.createMaestro);
 rutaMaestros.get('/:id',controllerMaestros.leerMaestrosPorId);
 rutaMaestros.get('/', controllerMaestros.leerMaestros);
 rutaMaestros.put('/:id',controllerMaestros.actualizarMaestro);
+rutaMaestros.delete('/:id', controllerMaestros.eliminarMaestro);
 
 export default rutaMaestros;
