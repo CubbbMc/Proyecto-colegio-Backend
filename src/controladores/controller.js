@@ -27,7 +27,26 @@ catch(error){
 }
 
 
-} 
+},
+
+leerMaestrosPorId: async(req,res)=>{
+    try {
+        const maestroEncontrado = await modelMaestros.findById(req.params.id);
+        if(maestroEncontrado._id){
+            res.json({
+            mensaje: "Maestro encontrado",
+            datos: maestroEncontrado,
+        });
+        }
+
+    } catch (error) {
+        res.json({
+        mensaje: "Maestro No encontrado",
+        datos: error,
+    });
+        
+    }
+}
 
 }
 export default controllerMaestros;
