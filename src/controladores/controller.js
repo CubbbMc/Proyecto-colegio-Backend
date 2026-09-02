@@ -42,7 +42,7 @@ leerMaestrosPorId: async(req,res)=>{
 
     } catch (error) {
         res.json({
-        mensaje: "Maestro No encontrado",
+        mensaje: "Maestro No  encontrado",
         datos: error,
     });
         
