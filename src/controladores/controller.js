@@ -60,7 +60,7 @@ leerMaestros: async(req, res) => {
         res.json({
             mensaje: "Lista de maestros no encontrada",
             datos: error,
-        })
+        });
     }
 },
 
@@ -77,11 +77,25 @@ actualizarMaestro: async (req, res) =>{
         res.json({
             mensaje: "Error al actualizar el maestro",
             datos: error,
-        })
+        });
     }
-}
+},
 
+eliminarMaestro: async (req, res) =>{
+    try { const eliminar = await modelMaestros.findByIdAndDelete(req.params.id);
+        if (eliminar._id){
+            res.json({
+                mensaje:"maestro Eliminado",
+                datos:  null
+            });
+        }
+} catch (error){
+    res.json({
+                mensaje:"no se pudo eliminar maestro",
+                datos:  error
+            });
 }
-
+}
+};
 
 export default controllerMaestros;
