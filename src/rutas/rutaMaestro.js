@@ -4,6 +4,7 @@ import controllerMaestros from "../controladores/controller.js";
 const rutaMaestros = Router();
 rutaMaestros.post('/', controllerMaestros.createMaestro);
 rutaMaestros.get('/:id',controllerMaestros.leerMaestrosPorId);
+rutaMaestros.get('/', controllerMaestros.leerMaestros);
 
 
 export default rutaMaestros;
