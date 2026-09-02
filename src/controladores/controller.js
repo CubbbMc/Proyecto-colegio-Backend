@@ -12,7 +12,7 @@ try{
     if(guardarMaestro._id){
         res.json({
             mensaje: "Maestro Guardado",
-            datos: guardarMaestro._id
+            datos: guardarMaestro
 
         });
         
@@ -20,6 +20,7 @@ try{
     
 }
 catch(error){
+    console.log(error);
     res.json({
         mensaje: "Maestro No Guardado",
         datos: error
@@ -41,7 +42,7 @@ leerMaestrosPorId: async(req,res)=>{
 
     } catch (error) {
         res.json({
-        mensaje: "Maestro No encontrado",
+        mensaje: "Maestro No  encontrado",
         datos: error,
     });
         
