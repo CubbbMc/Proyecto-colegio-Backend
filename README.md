@@ -34,3 +34,5 @@ npm i jsonwebtoken
 npm i dotenv
 
 Cada vez que hacemos pull instalamos los modulos de node con "npm i"
+
+algo att profe
