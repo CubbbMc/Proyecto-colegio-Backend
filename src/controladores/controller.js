@@ -66,7 +66,11 @@ leerMaestros: async(req, res) => {
 
 actualizarMaestro: async (req, res) =>{
     try {
-        const teacherUpdate = await modelMaestros.findByIdAndUpdate(req.params.id, req.body);
+        const UptPassword = {...req.body} /* realiza copia superficial */
+        if (UptPassword.contraseña){
+            UptPassword.contraseña = await bcrypt.hash(UptPassword.contraseña, 10);
+        }
+        const teacherUpdate = await modelMaestros.findByIdAndUpdate(req.params.id, UptPassword,{new: true});
         if(teacherUpdate._id){
             res.json({
                 mensaje: "Maestro actualizado correctamente",
@@ -85,7 +89,7 @@ eliminarMaestro: async (req, res) =>{
     try { const eliminar = await modelMaestros.findByIdAndDelete(req.params.id);
         if (eliminar._id){
             res.json({
-                mensaje:"maestro Eliminado",
+                mensaje:`maestro Eliminado con ID:${eliminar._id}`,
                 datos:  null
             });
         }
