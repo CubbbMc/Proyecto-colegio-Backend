@@ -32,10 +32,38 @@ const controllerLogin = {
             }
         } catch (error) {
             res.json({
-                mensaje:`Ocurrio un Error durante el Login`,
+                mensaje:'Ocurrio un Error durante el Login',
                 datos: error ,
-            })
+            });
+        }
+    },
+
+    validarToken: async (req, res) => {
+        try {
+            
+            const token2 = req.params.token;
+            const validar = await verificarToken(token2);
+
+            if (validar && validacion.id) {
+                res.json({
+                    mensaje: 'Validación de token exitosa',
+                    datos: validar,
+                });
+            } else {
+                res.json({
+                    mensaje: 'Token inválido',
+                    datos: null,
+                });
+            }
+
+        } catch (error) {
+            res.json({
+                    mensaje: 'Ocurrió un error validando el token',
+                    datos: error,
+                });
         }
     }
 }
+
+export default controllerLogin;
 
