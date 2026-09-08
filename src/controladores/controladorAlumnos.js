@@ -1,3 +1,4 @@
+import { request } from 'express';
 import {uploadImage} from '../middlewares/resources.js';
 import modelAlumnos from '../models/modelAlumnos.js';
 
@@ -32,6 +33,22 @@ const contStudent = {
                     mensaje:'Ocurrio un error creando el Estudiante',
                     datos: error
                 });
+        }
+    },
+    readStudent: async(req, res)=>{
+        try {
+            const studentFound = await modelAlumnos.findById(req.params.id);
+            if(studentFound._id){
+                res.json({
+                    mensaje:'Estudiante encontrado satisfactoriamente',
+                    datos: studentFound,
+                });
+            }
+        } catch (error) {
+            res.json({
+               mensaje:'Ocurrio un error encontrando el Estudiante',
+                datos: error, 
+            });
         }
     }
 
