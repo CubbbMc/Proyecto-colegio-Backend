@@ -101,6 +101,39 @@ const contStudent = {
             
             
         }
+    },
+    deleteStudent: async(req, res) => {
+       try {
+        const studentToDelete = await modelAlumnos.findByIdAndDelete(
+            req.params.id
+        );
+
+        if(!studentToDelete){
+            res.json({
+                mensaje: "Estudiante no encontrado para eliminar.",
+                datos: error,
+            })
+        }
+
+        if(studentToDelete.Foto){
+            const rutaFoto = path.join('imagenes', studentToDelete.Foto);
+
+            if(fs.existsSync(rutaFoto)){
+                fs.unlinkSync(rutaFoto);
+            }
+        }
+
+        res.json({
+            mensaje: "Estudiante eliminado correctamente.",
+            datos: null,
+        });
+
+       } catch (error) {
+            res.json({
+                mensaje: "Error al eliminar el estudiante.",
+                datos: error,
+            });
+       } 
     }
 
 }
