@@ -60,7 +60,7 @@ const contStudent = {
             );
             if (!fotoUpdate) {
                 if (req.file){
-                    fs.unlinkSync(res.file.path);
+                    fs.unlinkSync(req.file.path);
                 }
                 res.json({
                     mensaje: 'Estudiante no encontrado',
