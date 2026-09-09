@@ -85,7 +85,7 @@ const contStudent = {
             };
 
             const studentUpdate = await modelAlumnos.findByIdAndUpdate(
-                id, nuevoModeloEstudiante, {
+                req.params.id, nuevoModeloEstudiante, {
                 new: true
             });
             return res.json({
