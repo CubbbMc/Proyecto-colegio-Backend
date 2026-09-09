@@ -6,5 +6,6 @@ const studentRoutes = Router();
 studentRoutes.post('/', contStudent.createStudent);
 studentRoutes.get('/:id', contStudent.readStudent);
 studentRoutes.put('/:id', uploadImage, contStudent.updateStudent);
+studentRoutes.delete('/:id', contStudent.deleteStudent);
 
 export default studentRoutes;
