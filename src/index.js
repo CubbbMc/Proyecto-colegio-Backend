@@ -3,6 +3,6 @@ import "dotenv/config";
 import "./connection.js"
 app.listen(3001,() => {
 
-    console.log("seridor contectado a http://localhost:3001");
+    console.log("servidor contectado a http://localhost:3001");
 
 });
