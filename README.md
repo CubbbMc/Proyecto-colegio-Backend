@@ -1,38 +1,137 @@
-# Proyecto-colegio-Backend
+# antes de inciar el proyecto ver documento Actualizar node  para realizar la instalacion 
+ crear una carpeta Back 
+1. dentro de la carpeta back uso el comando 
+2.  npm init --yes para inicializar mi proyecto 
+2.1 se creara el paquete json
 
-Hello world!
+3. instalar las dependencias a usar 
+# Dependencias fundamentales
+* npm i express:Es el framework web más popular para Node.js. Proporciona una estructura sólida para crear aplicaciones web y API RESTful. Te permite definir rutas, manejar solicitudes HTTP, y mucho más.
+* npm i nodemon: Esta herramienta es esencial en el desarrollo. Automatiza el reinicio del servidor cada vez que se guardan cambios en el código, lo que agiliza el proceso de desarrollo.
 
-Se creara proyecto "de colegio" especializado en backend.
+# Manejo de Datos y Base de Datos:
+* npm i mongodb: Es una base de datos NoSQL, altamente escalable y flexible. Se utiliza para almacenar datos estructurados y no estructurados de manera eficiente.
+* npm i mongoose: Es un Object Document Mapper (ODM) para MongoDB. Proporciona una interfaz más amigable para interactuar con la base de datos, modelando los datos como objetos de JavaScript.
+* npm i fs-extra: Amplía las funcionalidades del módulo fs de Node.js, ofreciendo métodos más convenientes para trabajar con el sistema de archivos, como copiar directorios, mover archivos, etc.
 
-paso a paso
+# Seguridad y Autenticación:
+* npm i bcryptjs: Se utiliza para hashear contraseñas de manera segura. Evita almacenar contraseñas en texto plano, lo que las hace más resistentes a ataques.
+* npm i jsonwebtoken:Permite generar y verificar tokens JWT (JSON Web Tokens), que se utilizan comúnmente para implementar autenticación y autorización en aplicaciones web.
+* npm i cors: Gestiona las políticas de CORS (Cross-Origin Resource Sharing), permitiendo que aplicaciones de diferentes orígenes se comuniquen entre sí. Es esencial para aplicaciones que interactúan con front-ends en diferentes dominios.
 
-# Inicializa un proyecto de Node.js creando un archivo package.json con valores predeterminados por defecto (-y)
-npm init -y
+# Utilidades y Herramientas:
+* npm i dotenv: Carga variables de entorno desde un archivo .env, lo que permite mantener las credenciales y configuraciones sensibles fuera del control de versiones.
+* npm i multer: Se utiliza para manejar el envío de archivos a través de formularios HTML. Es útil para implementar funcionalidades de carga de imágenes, archivos, etc.
+* npm i morgan: Es un middleware de Express que registra las solicitudes HTTP que llegan al servidor. Es útil para depurar y monitorear el tráfico de la aplicación.
 
-# Instala Express, un framework web rápido, minimalista y flexible para Node.js que facilita la creación de servidores y APIs
-npm i express
+4. Luego de instalar las dependencias a la altura de mi package.json creo una carpeta que sera la que contendra de forma organizada todo mi back esta carpeta en desarrollo se le llama src lo que significa fuente en español y se usa especificamente para almacenar el codigo fuente de mi proyecto
 
-# Instala Nodemon, una herramienta de desarrollo que reinicia automáticamente la aplicación cuando detecta cambios en los archivos
-npm i nodemon
+5. Dentro de mi carpeta src creo tres archivos
+* index.js
+* servidor.js
+* conexion.js
 
-# Instala Morgan, un middleware de registro (logger) de solicitudes HTTP para Node.js, útil para ver las peticiones que llegan al servidor
-npm i morgan
+# servidor.js: 
+6. dentro de este archivo 
+* import express from "express"; para realizar la conexion con el servidor 
 
-# Instala el controlador oficial de MongoDB para Node.js, permitiendo conectar y operar directamente con bases de datos MongoDB
-npm i mongodb
+* ingreso el siguiente codigo 
+const nombreasignado = express(); para realizar la conexion con la constante servidor 
+nombreasignado.use(morgan("dev"));
+nombreasignado.use(express.json());
+nombreasignado.get('/', (solicitud, respuesta)=>{
+    respuesta.status(404).send("No encontrado");
+}); por si no encuentra la conexion me enviara esta respuesta 
 
-# Instala Mongoose, una librería de modelado de datos de objetos (ODM) para MongoDB en Node.js, que facilita la validación y esquemas
-npm i mongoose
+export default nombreasignado;
 
-# Instala Bcrypt.js, una librería para cifrar (hashear) y comparar contraseñas de forma segura
-npm i bcryptjs
+# index.js 
+ejemplo con el puerto 3000
+7. import servidor  from "./servidor.js";
+* servidor.listen(3000, ()=>{
+    console.log("El servidor se esta escuchando en el link http://localhost:3000")
+});
+* indicamos que el servidor esta escuchando en el puerto 3000
 
-# Instala Jsonwebtoken (JWT), una librería para generar y verificar tokens de autenticación basados en JSON
-npm i jsonwebtoken
+# package.json
+8. cambio la ruta de conexion en el package.json para poder conectarme con morgan para poder realizar las depuraciones automaticamente a mi codigo 
+* en el main pongo la ruta del src/index.js
+* en los scripts  agrego el objeto "start" de la siguiente manera:  "start": "node src/index.js", creo un nuevo objeto llamado dev y uso nodemon mas la ruta del main de la siguiente forma "dev": "nodemon src/index.js",
+* busco el objeto llamado type indicando que voy a usar module
 
-# Instala Dotenv, un módulo que carga variables de entorno desde un archivo .env en process.env
-npm i dotenv
+# Probar la conexion
 
-Cada vez que hacemos pull instalamos los modulos de node con "npm i"
+9. en la terminal ingreso el comando npm run dev para probar la conexion 
+* dentro de la consola me debe devolver esta respuesta 
+> back@1.0.0 dev
+> nodemon src/index.js
+[nodemon] 3.1.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node src/index.js`
+El servidor se esta escuchando en el link http://localhost:3000
 
-algo att profe
+10. luego de establecer la conexion procedemos a crear la base de datos en este caso se trabajara con mongo DB 
+
+11. creamos un archivo .env a la misma altura de mi package.json
+
+# .env
+12. dentro del archivo .env creo una variable de entorno que va a contener la ruta que copie en mongoDB en este caso mi variable de entorno se llama MONGODB
+
+# conexion.js
+13. ingreso el siguiente codigo 
+import mongoose from "mongoose";
+mongoose
+
+.connect(process.env.MONGODB)
+.then((dato)=>{
+    console.log("esta conectado a la base de datos");
+
+}).catch((error)=>{
+    console.log("no se conecto a la base de datos");
+});
+
+# index.js
+14. modifico mi archivo index.js en sus primeras lineas agregando las importanciondes de dotenv import "dotenv/config"; para que podamos leer la ruta de nuestra variable de entorno 
+* importo la conexion a la v=base de datos que esta en mi archivo llamado conexion.js import "./conexion.js"
+* ahora el mensaje en mi consola cambiara al siguiente 
+[nodemon] restarting due to changes...
+[nodemon] starting `node src/index.js`
+El servidor se esta escuchando en el link http://localhost:3000
+esta conectado a la base de datos
+* esto nos indica que estamos conectado a nuestra base de datos de manera correcta si presentas errores en este punto revisa tu codigo con base a los pasos anteriores antes de seguir con los siguientes pasos 
+
+# src
+16. dentro de nuestro archivo src creamos tres carpetas
+* models
+* controllers
+* routes
+
+# models 
+17. dentro de mi carpeta models vamos a ingresar los modelos que necesitemos
+
+# controllers
+18. dentro de mi carpeta controllers creo mis controladores
+* creo los metodos que pertenecen al CRUD
+
+# routes
+19. organizo mi enrutamiento 
+
+# servidor
+20. importo los enrutamientos que creee en las rutas y los activo en el con ayuda del servidor que es express
+
+# postman
+21. Luego realizo la prueba en postman con cada uno de los metodos para el crud
+# RUTA EN POSTMAN EJEMPLO ENDPOINT USERS
+* POST http://localhost:3000/users
+* GET http://localhost:3000/users
+* GET http://localhost:3000/users/idgenerado
+* PUT http://localhost:3000/users/idamodificar 
+* DELETE http://localhost:3000/users/idaeliminar
+
+22. # como se va a crear un usuario lo mas posible es que necesite loguearme estonces voy a realizar mi controlador de login, mi enrutador y como los datos para el logueo los voy a tomar de algun usuario que ya este registrado entonces voy a tomar el mismo shema de usuario
+
+23. antes de crear mi controlador de inicio de sesion debo crear una funcion para generar un token y otra para verfircar el token esto se realiza con el fin de que cuando el usuario se loguee su sesion no quede abierta por siempre sin dar cerrar sesion sino que tenga un tiempo limite de inactividad se puede crear en otra carpeta para tener una mejor trazabilidad y se le puede asignar un nombre correspondiente a la creacion del token.
+
+
